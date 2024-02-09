@@ -4,6 +4,7 @@ from flask_cors import CORS
 import request.request as req
 import controller.auth.auth as user
 import controller.attraction as attraction
+import controller.critique as critique
 
 app = Flask(__name__)
 CORS(app)
@@ -50,6 +51,32 @@ def deleteAttraction(index):
     if (attraction.delete_attraction(index)):
         return "Element supprimé.", 200
     return jsonify({"message": "Erreur lors de la suppression."}), 500
+  
+# Critique
+@app.post('/critique')
+def addCritique():
+  json = request.get_json()
+  retour = critique.add_critique(json)
+  if (retour):
+    return "Element ajouté.", 200
+  return "Erreur lors de l'ajout.", 500
+  
+@app.get('/critique')
+def getAllCritique():
+    result = critique.get_all_critiques()
+    return result, 200
+
+@app.get('/ /<int:index>')
+def getCritique(index):
+    result = critique.get_critiques(index)
+    return result, 200
+  
+@app.delete('/critique/<int:index>')
+def deleteCritique(index):     
+      if (critique.delete_critiques(index)):
+          return "Element supprimé.", 200
+      return jsonify({"message": "Erreur lors de la suppression."}), 500
+    
 
 @app.post('/login')
 def login():
