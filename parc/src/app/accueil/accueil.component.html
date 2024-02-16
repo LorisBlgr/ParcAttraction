@@ -3,6 +3,7 @@
     <mat-card-title>Bienvenue sur le site internet du parc d'attraction</mat-card-title>
   </mat-card-header>
   <mat-card-content>
+    <h1>Les attractions</h1>
     <div class="attraction-title">
       <div class="attraction">
         <span>Nom de l'attraction</span>
@@ -19,9 +20,10 @@
     </ng-container>
   </mat-card-content>
   <mat-card-content>
+    <h1>Les critiques</h1>
     <div class="critique-title">
       <div class="critique">
-        <span>Difficulté de l'attraction / 5</span>
+        <span>Note de l'attraction / 5</span>
         <span>Commentaire</span>
         <span>Nom</span>
         <span>Prenom</span>
@@ -31,8 +33,8 @@
       <div class="critique">
         <span>{{critique.note}} / 5</span>
         <span>{{critique.commentaire}}</span>
-        <span>{{critique.nom}}</span>
-        <span>{{critique.prenom}}</span>
+        <span>{{critique.nom ? critique.nom : 'anonyme'}}</span>
+        <span>{{critique.prenom ? critique.prenom : 'anonyme'}}</span>
       </div>
     </ng-container>
   </mat-card-content>
