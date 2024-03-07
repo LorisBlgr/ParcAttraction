@@ -66,7 +66,7 @@ def getAllCritique():
     result = critique.get_all_critiques()
     return result, 200
 
-@app.get('/ /<int:index>')
+@app.get('/critique/<int:index>')
 def getCritique(index):
     result = critique.get_critiques(index)
     return result, 200

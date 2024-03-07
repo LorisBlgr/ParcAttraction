@@ -4,4 +4,5 @@ export interface CritiqueInterface {
   note: number;
   nom: string | null;
   prenom: string | null;
+  attraction: number;
 }

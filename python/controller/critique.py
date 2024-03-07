@@ -19,7 +19,7 @@ def add_critique(data):
       req.insert_in_db(requete)
       id = data['id']
     else:
-      requete = "INSERT INTO critiques (commentaire, note, nom, prenom) VALUES (?, ?, ?, ?)"
+      requete = "INSERT INTO critique (commentaire, note, nom, prenom) VALUES (?, ?, ?, ?)"
       id = req.insert_in_db(requete, (data["commentaire"], data["note"], data["nom"], data["prenom"]))
 
     return id
@@ -33,12 +33,9 @@ def get_critiques(id):
     if (not id):
         return False
 
-    json = req.select_from_db("SELECT * FROM critique WHERE id = ?", (id,))
+    json = req.select_from_db("SELECT * FROM critique WHERE attraction = ?", (id,))
 
-    if len(json) > 0:
-        return json[0]
-    else:
-        return []
+    return json
 
 def delete_critiques(id):
     if (not id):

@@ -3,7 +3,7 @@ INSERT INTO attraction (nom, description, difficulte, visible) VALUES ('Montagne
 
 INSERT INTO users (name, password) VALUES ('toto', 'toto');
 
-INSERT INTO critique (commentaire,note,nom,prenom) VALUES ("Super", 5, "John", "Doe");
-INSERT INTO critique (commentaire,note,nom,prenom) VALUES ("Nul", 1, "Karine", "François");
-INSERT INTO critique (commentaire,note,nom,prenom) VALUES ("Moyen", 3, "Jean", "Dupont");
-INSERT INTO critique (commentaire,note,nom,prenom) VALUES ("Pas mal", 4, "", "");
+INSERT INTO critique (commentaire,note,nom,prenom,attraction) VALUES ("Super", 5, "John", "Doe",1);
+INSERT INTO critique (commentaire,note,nom,prenom,attraction) VALUES ("Nul", 1, "Karine", "François",2);
+INSERT INTO critique (commentaire,note,nom,prenom,attraction) VALUES ("Moyen", 3, "Jean", "Dupont",1);
+INSERT INTO critique (commentaire,note,nom,prenom,attraction) VALUES ("Pas mal", 4, "", "",2);

@@ -12,7 +12,7 @@
       </div>
     </div>
     <ng-container *ngFor="let attraction of attractions | async;">
-      <div class="attraction" *ngIf="attraction.visible">
+      <div class="attraction attraction-row" (click)="attraction.attraction_id !== null && navigateToCritiquesPage(attraction.attraction_id)">
         <span>{{attraction.nom}}</span>
         <span>{{attraction.description}}</span>
         <span>{{attraction.difficulte}} / 5</span>
@@ -27,6 +27,7 @@
         <span>Commentaire</span>
         <span>Nom</span>
         <span>Prenom</span>
+        <span>Attraction</span>
       </div>
     </div>
     <ng-container *ngFor="let critique of critiques | async;">
@@ -35,6 +36,7 @@
         <span>{{critique.commentaire}}</span>
         <span>{{critique.nom ? critique.nom : 'anonyme'}}</span>
         <span>{{critique.prenom ? critique.prenom : 'anonyme'}}</span>
+        <span>{{critique.attraction}}</span>
       </div>
     </ng-container>
   </mat-card-content>

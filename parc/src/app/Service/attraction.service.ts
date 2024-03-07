@@ -8,6 +8,7 @@ import { MessageInterface } from '../Interface/message.interface';
   providedIn: 'root',
 })
 export class AttractionService {
+  static getAttractionById: any;
 
   constructor(private dataService: DataService) {
 
@@ -23,5 +24,11 @@ export class AttractionService {
     const url = "http://127.0.0.1:5000/attraction";
     const data = this.dataService.postData(url, attraction);
     return data as Observable<MessageInterface>;
+  }
+
+  public getAttractionById(attractionId: number): Observable<AttractionInterface> {
+    const url = "http://127.0.0.1:5000/attraction/" + attractionId;
+    const data = this.dataService.getData(url);
+    return data as Observable<AttractionInterface>;
   }
 }

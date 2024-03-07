@@ -26,5 +26,7 @@ CREATE TABLE critique (
   commentaire varchar(255),
   note int,
   nom varchar(255) null,
-  prenom varchar(255) null
+  prenom varchar(255) null,
+  attraction int,
+  FOREIGN KEY (attraction) REFERENCES attraction(attraction_id)
 );
