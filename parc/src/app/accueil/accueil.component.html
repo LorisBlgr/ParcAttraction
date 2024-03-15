@@ -9,34 +9,16 @@
         <span>Nom de l'attraction</span>
         <span>Description de l'attraction</span>
         <span>Difficulté de l'attraction / 5</span>
+        <span>Action</span>
       </div>
     </div>
     <ng-container *ngFor="let attraction of attractions | async;">
-      <div class="attraction attraction-row" (click)="attraction.attraction_id !== null && navigateToCritiquesPage(attraction.attraction_id)">
+      <div class="attraction attraction-row" (click)="attraction.attraction_id !== null && navigateToCritiquesPage(attraction.attraction_id)" title="Consulter la critique de l'attraction" *ngIf="attraction.visible">
         <span>{{attraction.nom}}</span>
         <span>{{attraction.description}}</span>
         <span>{{attraction.difficulte}} / 5</span>
-      </div>
-    </ng-container>
-  </mat-card-content>
-  <mat-card-content>
-    <h1>Les critiques</h1>
-    <div class="critique-title">
-      <div class="critique">
-        <span>Note de l'attraction / 5</span>
-        <span>Commentaire</span>
-        <span>Nom</span>
-        <span>Prenom</span>
-        <span>Attraction</span>
-      </div>
-    </div>
-    <ng-container *ngFor="let critique of critiques | async;">
-      <div class="critique">
-        <span>{{critique.note}} / 5</span>
-        <span>{{critique.commentaire}}</span>
-        <span>{{critique.nom ? critique.nom : 'anonyme'}}</span>
-        <span>{{critique.prenom ? critique.prenom : 'anonyme'}}</span>
-        <span>{{critique.attraction}}</span>
+        <!-- consulter la critique -->
+        <span (click)="attraction.attraction_id !== null && navigateToCritiquesPage(attraction.attraction_id)" title="Consulter la critique de l'attraction">Consulter les critiques</span>
       </div>
     </ng-container>
   </mat-card-content>

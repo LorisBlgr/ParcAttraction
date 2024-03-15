@@ -20,19 +20,20 @@ export const utilisateurEstConnecte = () => {
 };
 
 export const routes: Routes = [
-    {
-      path: 'login',
-      component: LoginComponent,
-    },
-    {
-      path: 'admin',
-      component: AdminComponent,
-      canActivate: [utilisateurEstConnecte]
-    },
-    {
-      path: 'accueil',
-      component: AccueilComponent,
-    },
-    { path: '',   redirectTo: '/accueil', pathMatch: 'full' },
-    { path: 'critiques/:id', component: CritiquesPageComponent },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: 'admin',
+    component: AdminComponent,
+    canActivate: [utilisateurEstConnecte]
+  },
+  {
+    path: 'accueil',
+    component: AccueilComponent,
+  },
+  { path: '', redirectTo: '/accueil', pathMatch: 'full' },
+  { path: 'critiques', component: CritiquesPageComponent },
+  { path: 'critiques/:id', component: CritiquesPageComponent }
 ];

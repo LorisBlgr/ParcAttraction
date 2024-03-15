@@ -1,29 +1,29 @@
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>
-      <div *ngIf="attraction">
-        <span>Critiques de l'attraction {{attraction.nom}}</span>
+<ng-container *ngIf="attraction || !attraction">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        <div>
+          <span>Critiques de l'attraction {{attraction ? attraction.nom : 'Toutes les attractions'}}</span>
+        </div>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="critique-title">
+        <div class="critique">
+          <span>Note de l'attraction / 5</span>
+          <span>Commentaire</span>
+          <span>Nom</span>
+          <span>Prenom</span>
+        </div>
       </div>
-    </mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <div class="critique-title">
-      <div class="critique">
-        <span>Note de l'attraction / 5</span>
-        <span>Commentaire</span>
-        <span>Nom</span>
-        <span>Prenom</span>
-        <span>Attraction</span>
-      </div>
-    </div>
-    <ng-container *ngFor="let critique of critiques | async;">
-      <div class="critique">
-        <span>{{critique.note}} / 5</span>
-        <span>{{critique.commentaire}}</span>
-        <span>{{critique.nom ? critique.nom : 'anonyme'}}</span>
-        <span>{{critique.prenom ? critique.prenom : 'anonyme'}}</span>
-        <span>{{critique.attraction}}</span>
-      </div>
-    </ng-container>
-  </mat-card-content>
-</mat-card>
+      <ng-container *ngFor="let critique of critiques | async;">
+        <div class="critique">
+          <span>{{critique.note}} / 5</span>
+          <span>{{critique.commentaire}}</span>
+          <span>{{critique.nom ? critique.nom : 'anonyme'}}</span>
+          <span>{{critique.prenom ? critique.prenom : 'anonyme'}}</span>
+        </div>
+      </ng-container>
+    </mat-card-content>
+  </mat-card>
+</ng-container>

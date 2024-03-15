@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { AttractionInterface } from '../Interface/attraction.interface';
 import { AttractionService } from '../Service/attraction.service';
+import { Observable, map } from 'rxjs';
 
 @Component({
   selector: 'app-critiques-page',
@@ -16,24 +17,51 @@ import { AttractionService } from '../Service/attraction.service';
 
 export class CritiquesPageComponent {
   critiques: any;
-  attraction: AttractionInterface | null = null; // Declare the 'attraction' property
+  attraction: AttractionInterface | null = null;
+  attractions: Observable<AttractionInterface[]> | undefined;
 
-  constructor(private route: ActivatedRoute, private critiqueService: CritiqueService, private attractionService: AttractionService) {
+  constructor(
+    private route: ActivatedRoute,
+    private critiqueService: CritiqueService,
+    private attractionService: AttractionService
+  ) {
     this.route.params.subscribe(params => {
       const attractionId = params['id'];
-      this.loadCritiques(attractionId);
-      this.loadAttraction(attractionId);
+      if (attractionId == null) {
+        this.loadAllCritiques();
+      } else {
+        this.loadCritiques(attractionId);
+        this.loadAttraction(attractionId);
+      }
     });
+  }
+
+  ngOnInit(): void {
+    this.attractions = this.attractionService.getAllAttraction().pipe(
+      map(attractions => attractions.filter(attraction => attraction.visible))
+    );
   }
 
   loadCritiques(attractionId: number | null): void {
     if (attractionId !== null) {
-      this.critiques = this.critiqueService.getCritiquesByAttractionId(attractionId);
+      this.attractionService.getAttractionById(attractionId).subscribe(attraction => {
+        if (attraction && attraction.visible) {
+          this.critiques = this.critiqueService.getCritiquesByAttractionId(attractionId);
+        } else {
+          this.critiques = []; // No critiques to display if the attraction is not visible
+        }
+      });
     }
   }
 
+  loadAllCritiques(): void {
+    this.critiques = this.critiqueService.getAllCritique();
+  }
+
   loadAttraction(attractionId: number | null): void {
-    if (attractionId !== null) {
+    if (attractionId == null) {
+      this.attraction = null;
+    } else {
       this.attractionService.getAttractionById(attractionId).subscribe(attraction => {
         this.attraction = attraction;
       });

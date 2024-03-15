@@ -1,5 +1,11 @@
 <mat-toolbar>
   <span><a id="site-title" routerLink="/accueil">Parc d'attraction</a></span>
+  <div>
+    <button mat-stroked-button routerLink="/critiques">Critiques</button>
+  </div>
+  <div *ngIf="!authService.isLoggedIn">
+    <button mat-stroked-button routerLink="/login">Connexion</button>
+  </div>
   <div *ngIf="authService.isLoggedIn">
     <button mat-stroked-button routerLink="/admin">Admin</button>
   </div>
